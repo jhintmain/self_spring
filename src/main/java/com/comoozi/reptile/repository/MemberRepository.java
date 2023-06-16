@@ -18,4 +18,11 @@ public class MemberRepository {
     public MemberDTO findByEmail(String email) {
         return sql.selectOne("Member.findByEmail",email);
     }
+
+    public int updateLoginDate(MemberDTO mDTO) {
+        return sql.update("Member.updateLoinDate",mDTO);
+    }
+    public int updateState(MemberDTO mDTO) {
+        return sql.update("Member.updateState",mDTO);
+    }
 }

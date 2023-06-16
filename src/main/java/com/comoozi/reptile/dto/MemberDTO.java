@@ -18,4 +18,5 @@ public class MemberDTO {
     private int age;
     private MemberState state;   // 회원 상태 ['normal','stop','leave']
     private LocalDateTime join_date;
+    private LocalDateTime last_login_date;
 }

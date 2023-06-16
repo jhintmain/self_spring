@@ -10,4 +10,11 @@
     <select id="findByEmail" parameterType="String" resultType="member">
         select * from member_info where email='${email}'
     </select>
+    <update id="updateLoinDate" parameterType="member">
+        update member_info set last_login_date = '${last_login_date}' where id = ${id}
+    </update>
+
+    <update id="updateState" parameterType="member">
+        update member_info set state = '${state}' where id = ${id}
+    </update>
 </mapper>
