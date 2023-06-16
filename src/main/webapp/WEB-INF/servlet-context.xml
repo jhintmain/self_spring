@@ -7,51 +7,61 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <annotation-driven />
+    <annotation-driven/>
 
     <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
     <resources mapping="/resources/**" location="/resources/"/>
 
-    <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
     <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <beans:property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
         <beans:property name="prefix" value="/WEB-INF/jsps/" />
         <beans:property name="suffix" value=".jsp" />
-        <beans:property name="order" value="2"/>
+        <beans:property name="order" value="2" />
+        <beans:property name="viewNames" value="*jsp" />
     </beans:bean>
 
     <!-- thymeleaf 설정 부분  -->
     <beans:bean id="templateResolver"
                 class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
-        <beans:property name="prefix" value="/WEB-INF/templates/" />
-        <beans:property name="suffix" value=".html" />
-        <beans:property name="order" value="1"/>
-        <beans:property name="templateMode" value="HTML5" />
-        <beans:property name="cacheable" value="false" />
-        <beans:property name="characterEncoding" value="UTF-8" />
+        <beans:property name="prefix" value="/WEB-INF/templates/"/>
+        <beans:property name="suffix" value=".html"/>
+        <beans:property name="order" value="1" />
+        <beans:property name="templateMode" value="HTML5"/>
+        <beans:property name="cacheable" value="false"/>
+        <beans:property name="characterEncoding" value="UTF-8"/>
     </beans:bean>
 
     <beans:bean id="templateEngine"
                 class="org.thymeleaf.spring5.SpringTemplateEngine">
         <beans:property name="templateResolver"
-                        ref="templateResolver" />
+                        ref="templateResolver"/>
     </beans:bean>
 
     <beans:bean
             class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
         <beans:property name="templateEngine"
-                        ref="templateEngine" />
-        <beans:property name="characterEncoding" value="UTF-8" />
+                        ref="templateEngine"/>
+        <beans:property name="characterEncoding" value="UTF-8"/>
     </beans:bean>
 
-<!--    <beans:bean-->
-<!--            class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
-<!--        <beans:property name="location"-->
-<!--                        value="/resources/config/application.config" />-->
-<!--        <beans:property name="fileEncoding" value="UTF-8" />-->
+
+    <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+<!--    <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+<!--        <beans:property name="prefix" value="/WEB-INF/jsps/"/>-->
+<!--        <beans:property name="suffix" value=".jsp"/>-->
+<!--        <beans:property name="order" value="2"/>-->
 <!--    </beans:bean>-->
+
+
+    <!--    <beans:bean-->
+    <!--            class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+    <!--        <beans:property name="location"-->
+    <!--                        value="/resources/config/application.config" />-->
+    <!--        <beans:property name="fileEncoding" value="UTF-8" />-->
+    <!--    </beans:bean>-->
     <!-- thymeleaf 설정 부분  -->
 
     <!-- 프로젝트 패키지이름 확인 -->
-    <context:component-scan base-package="com.codingrecipe.board" />
+    <context:component-scan base-package="com.comoozi.reptile"/>
 
 </beans:beans>

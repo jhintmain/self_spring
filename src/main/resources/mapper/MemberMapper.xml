@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Member">
+    <insert id="join" parameterType="member">
+        insert into member_info (user_password,user_name, email,address,mobile,age,state,join_date)
+        values(#{user_password},#{user_name},#{email},#{address},#{mobile},#{age},#{state},#{join_date})
+    </insert>
+    <select id="findByEmail" parameterType="String" resultType="member">
+        select * from member_info where email='${email}'
+    </select>
+</mapper>

@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Main</title>
 </head>
 <body>
-$END$
+<!--<h2 th:text="${sessionScope.user_name}님 환영합니다.">게스트님 환영합니다.</h2>-->
+
+<span th:text="${session.memberDTO?.email}"> USER_ID </span>
+<span th:text="WHAT">TEST</span>
+<button onclick="update()">내정보 수정하기</button>
+<button onclick="logout()">로그아웃</button>
+
 </body>
+<script>
+    const update = () => {
+        location.href = "/member/update";
+    }
+    const logout = () => {
+        location.href = "/member/logout";
+    }
+
+
+</script>
 </html>
