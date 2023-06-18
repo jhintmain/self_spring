@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+
+<div layout:fragment="content">
+    <form action="/member/update" method="post">
+        <div width="70%">
+            <input type="hidden" name="id" th:value="${memberDTO.id}">
+            <div class="input-group mb-3">
+                <span class="input-group-text">비밀번호</span>
+                <input type="text" class="form-control" name="user_password">
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text">이름</span>
+                <input type="text" class="form-control" name="user_name" th:value="${memberDTO.user_name}">
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text">나이</span>
+                <input type="text" class="form-control" name="age" th:value="${memberDTO.age}">
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text">주소</span>
+                <input type="text" class="form-control" name="address" th:value="${memberDTO.address}">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text">핸드폰</span>
+                <input type="text" class="form-control" name="mobile" th:value="${memberDTO.mobile}">
+            </div>
+
+            <input type="submit" value="정보 수정">
+        </div>
+
+    </form>
+</div>

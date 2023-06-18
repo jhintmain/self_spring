@@ -1,19 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <title>Jon</title>
-</head>
-<body>
-<h2>회원가입</h2>
-<form action="/member/join" method="post">
-  <input type="text" name="email" placeholder="이메일" id="email">
-  <input type="text" name="user_password" placeholder="비밀번호">
-  <input type="text" name="user_name" placeholder="이름">
-  <input type="text" name="age" placeholder="나이">
-  <input type="text" name="mobile" placeholder="전화번호">
-  <input type="submit" value="회원가입">
-</form>
-</body>
-</html>
+<html xmlns:th="http//www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+
+<div layout:fragment="content">
+    <form action="/member/join" method="post">
+        <input type="text" name="email" placeholder="이메일" id="email">
+        <input type="text" name="user_password" placeholder="비밀번호">
+        <input type="text" name="user_name" placeholder="이름">
+        <input type="text" name="age" placeholder="나이">
+        <input type="text" name="mobile" placeholder="전화번호">
+        <input type="submit" value="회원가입">
+    </form>
+</div>

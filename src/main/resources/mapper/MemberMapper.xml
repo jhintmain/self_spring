@@ -7,14 +7,25 @@
         insert into member_info (user_password,user_name, email,address,mobile,age,state,join_date)
         values(#{user_password},#{user_name},#{email},#{address},#{mobile},#{age},#{state},#{join_date})
     </insert>
+    <select id="findById" parameterType="Long" resultType="member">
+        select * from member_info where id=#{id}
+    </select>
     <select id="findByEmail" parameterType="String" resultType="member">
-        select * from member_info where email='${email}'
+        select * from member_info where email=#{email}
     </select>
     <update id="updateLoinDate" parameterType="member">
-        update member_info set last_login_date = '${last_login_date}' where id = ${id}
+        update member_info set last_login_date = #{last_login_date} where id = #{id}
     </update>
-
     <update id="updateState" parameterType="member">
-        update member_info set state = '${state}' where id = ${id}
+        update member_info set state = #{state} where id = #{id}
+    </update>
+    <update id="updateInfo" parameterType="member">
+        update member_info
+        set user_password = #{user_password},
+        user_name=#{user_name},
+        address=#{address},
+        mobile=#{mobile},
+        age=#{age}
+        where id = #{id}
     </update>
 </mapper>

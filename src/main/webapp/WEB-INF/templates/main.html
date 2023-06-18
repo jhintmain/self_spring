@@ -1,26 +1,39 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Main</title>
-</head>
-<body>
-<!--<h2 th:text="${sessionScope.user_name}님 환영합니다.">게스트님 환영합니다.</h2>-->
-
-<span th:text="${session.memberDTO?.email}"> USER_ID </span>
-<span th:text="WHAT">TEST</span>
-<button onclick="update()">내정보 수정하기</button>
-<button onclick="logout()">로그아웃</button>
-
-</body>
-<script>
-    const update = () => {
-        location.href = "/member/update";
-    }
-    const logout = () => {
-        location.href = "/member/logout";
-    }
+<html xmlns:th="http//www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
 
 
-</script>
+<th:block layout:fragment="header">
+    <header class="bg-dark py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">코무지 파충류샵</h1>
+                <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+            </div>
+        </div>
+    </header>
+</th:block>
+
+<div layout:fragment="content">
+    <div class="container">
+        <span th:text="${session.memberDTO?.email}"> USER_ID </span>
+    </div>
+</div>
+
+<!--<th:block layout:fragment="script">-->
+<!--    <script>-->
+<!--        const update = () => {-->
+<!--            location.href = "/member/update";-->
+<!--        }-->
+<!--        const logout = () => {-->
+<!--            location.href = "/member/logout";-->
+<!--       }-->
+<!--    </script>-->
+<!--</th:block>-->
+
+
 </html>
+
+
+

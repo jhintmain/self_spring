@@ -7,14 +7,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     // 메인 페이지
-    @GetMapping
-    public String index() {
-        return "index";
+//    @GetMapping
+//    public String index() {
+//        return "main";
+//    }
+
+    // 메인 페이지
+    @GetMapping(value = {"/", "/index", "/main"})
+    public String main() {
+        return "main";
     }
 
     // 메인 페이지
-    @GetMapping("/main")
-    public String main() {
-        return "main";
+    @GetMapping("/test")
+    public String test() {
+        return "test";
     }
 }

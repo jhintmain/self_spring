@@ -19,10 +19,18 @@ public class MemberRepository {
         return sql.selectOne("Member.findByEmail",email);
     }
 
-    public int updateLoginDate(MemberDTO mDTO) {
-        return sql.update("Member.updateLoinDate",mDTO);
+    public int updateLoginDate(MemberDTO memberDTO) {
+        return sql.update("Member.updateLoinDate",memberDTO);
     }
-    public int updateState(MemberDTO mDTO) {
-        return sql.update("Member.updateState",mDTO);
+    public int updateState(MemberDTO memberDTO) {
+        return sql.update("Member.updateState",memberDTO);
+    }
+
+    public int updateInfo(MemberDTO memberDTO) {
+        return sql.update("Member.updateInfo",memberDTO);
+    }
+
+    public MemberDTO findById(Long id) {
+        return sql.selectOne("Member.findById",id);
     }
 }
