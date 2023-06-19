@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 30초마다 설정 파일의 변경을 확인하고, 파일이 변경되면 다시 로딩 -->
+<configuration scan="true" scanPeriod="30 seconds">
+    <!-- logback이 정상 종료되도록 -->
+    <shutdownHook />
+
+    <!-- console에 로그 -->
+    <appender name="STDOUT"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!-- <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %40logger{0} - %C - %replace(%msg){'[\r\n]+',
+                ''} %n</Pattern> -->
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%logger] - %replace(%msg){'[\r\n]+', ''} %n</Pattern>
+        </layout>
+    </appender>
+
+    <!-- 로그 File에 저장 -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- <file>D:\\logs\\catalina.log</file> -->
+        <file>./logs/catalina.log</file>
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 일별로 로그파일이 생성된다. -->
+            <!-- LOCAL -->
+            <!-- <fileNamePattern>D:\\logs\\ming-%d{yyyy-MM-dd}.%i.log</fileNamePattern> -->
+            <fileNamePattern>./logs/ming-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- 5MB가 넘으면 새로운 로그파일이 생성된다. -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>5MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- 10건의 파일만 남기고 지난 로그파일은 삭제 된다. -->
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss} %level [%logger] - %msg%n
+            </Pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.ming9.myPage" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </logger>
+
+    <logger name="org.springframework">
+        <level value="INFO" />
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </root>
+
+</configuration>

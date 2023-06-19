@@ -4,5 +4,6 @@
 <configuration>
     <typeAliases>
         <typeAlias type="com.comoozi.reptile.dto.MemberDTO" alias="member"></typeAlias>
+        <typeAlias type="com.comoozi.reptile.dto.QADTO" alias="qa"></typeAlias>
     </typeAliases>
 </configuration>

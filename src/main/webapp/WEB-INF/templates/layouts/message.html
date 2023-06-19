@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+
+<th:block th:layout="script">
+    <th:block th:if="${#strings.length(data.message) != 0}">
+        <script type="text/javascript" charset="utf-8">
+           console.log({data.message});
+			window.alert("[[${data.message}]]");
+        </script>
+    </th:block>
+    <th:block th:if="${#strings.length(data.href) != 0}">
+        <th:block th:if="${data.href == -1}">
+            <script  type="text/javascript" charset="utf-8">
+                window.history.go(-1);
+
+
+            </script>
+        </th:block>
+        <th:block th:unless="${data.href == -1}">
+            <script  type="text/javascript" charset="utf-8">
+            window.location.href = '[[${data.href}]]';
+
+
+            </script>
+        </th:block>
+    </th:block>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+
+<div layout:fragment="content">
+    <!--/* 검색 */-->
+    <div class="search_box">
+        <form id="searchForm" action="/qa/list" method="get" autocomplete="off">
+            <input type="hidden" name="page" th:value="${paging.page}">
+            <div class="sch_group fl">
+                <select id="searchType1" name="searchType1" title="검색 유형 선택">
+                    <option value="">전체 검색</option>
+                    <option value="title" th:selected="${search.searchType1}=='title'">제목</option>
+                    <option value="writer_id" th:selected="${search.searchType1}=='writer_id'">작성자ID</option>
+                </select>
+                <input type="text" id="keyword1" name="keyword1" th:value="${search.keyword1}"
+                       placeholder="키워드를 입력해 주세요." title="키워드 입력"/>
+                <button type="submit" class="bt_search"><i class="fas fa-search"></i><span
+                        class="skip_info">검색</span></button>
+                <th:block th:if=${session.memberDTO}>
+                    <button type="button" th:onclick="|location.href='@{/qa/write}'|" class="bt_search"><i
+                            class="fas fa-search"></i><span
+                            class="skip_info">글쓰기</span></button>
+                </th:block>
+            </div>
+        </form>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col" class="text-center">No</th>
+            <th scope="col" class="text-center">카테고리</th>
+            <th scope="col" class="text-center">제목</th>
+            <th scope="col" class="text-center">글쓴이</th>
+            <th scope="col" class="text-center">작성일</th>
+            <th scope="col" class="text-center">조회수</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="list : ${qaList}">
+            <tr th:onclick="|location.href='@{/qa/detail(id=${list.id},page=${paging.page})}'|">
+                <td style="width: 5%" class="text-center" th:text="${list.id}">No</td>
+                <td style="width: 20%" class="text-center" th:text="${list.category}"></td>
+                <td style="width: 45%" th:text="${list.title}"></td>
+                <td style="width: 10%" class="text-center" th:text="${list.writer_name}"></td>
+                <td style="width: 10%" class="text-center" th:text="${list.reg_date}"></td>
+                <td style="width: 10%" class="text-center" th:text="${list.hit}"></td>
+            </tr>
+        </th:block>
+        <th:block th:if=${qaList.size()<1}>
+            <tr>
+                <td colspan="6">내역이 없습니다</td>
+            </tr>
+        </th:block>
+
+        </tbody>
+    </table>
+
+    <!-- 페이징-->
+    <div>
+        <th:block th:if="${paging.page<=1}">
+            <span th:text="[이전]">[이전]</span>
+        </th:block>
+        <th:block th:unless="${paging.page<=1}">
+            <a th:href="|javascript:paging('searchForm',${paging.page-1})|" th:text="[이전]">[이전]</a>
+        </th:block>
+
+        <th:block th:each="page : ${#numbers.sequence(paging.startPage,paging.endPage)}">
+            <th:block th:if="${page == paging.page}">
+                <span th:text="${page}">num</span>
+            </th:block>
+            <th:block th:unless="${page == paging.page}">
+                <a th:href="|javascript:paging('searchForm',${page})|" th:text="${page}">num</a>
+            </th:block>
+        </th:block>
+
+        <th:block th:if="${paging.page>=paging.maxPage}">
+            <span th:text="[다음]">[다음]</span>
+        </th:block>
+        <th:block th:unless="${paging.page>=paging.maxPage}">
+            <a th:href="|javascript:paging('searchForm',${paging.page+1})|" th:text="[다음]">[다음]</a>
+        </th:block>
+    </div>
+
+</div>

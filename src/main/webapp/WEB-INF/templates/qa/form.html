@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+
+<div layout:fragment="content">
+    <form action="/qa/write" method="post">
+
+        <select class="form-select" name="category" required>
+            <option>분류</option>
+            <th:block th:each="category : ${qaCategory}">
+                <option th:value="${category}" th:text="${category.getName()}">Category</option>
+            </th:block>
+        </select>
+        <div class="mb-3">
+            <label for="title" class="form-label">제목</label>
+            <input type="text" class="form-control" name="title" id="title" placeholder="제목" required>
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">내용</label>
+            <textarea class="form-control" name="content" id="content" rows="3" required></textarea>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="Y" name="secret_flag" id="secret_flag">
+            <label class="form-check-label" for="secret_flag">
+                비밀
+            </label>
+        </div>
+
+        <div class="button-login-box">
+            <button type="submit" class="btn btn-primary btn-xs" style="width:100%">등록</button>
+        </div>
+
+    </form>
+</div>

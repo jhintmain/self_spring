@@ -1,17 +1,18 @@
 package com.comoozi.reptile.controller;
 
-import ch.qos.logback.classic.Logger;
+import com.comoozi.reptile.ScriptUtils;
 import com.comoozi.reptile.dto.MemberDTO;
 import com.comoozi.reptile.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @Controller
 @RequiredArgsConstructor
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpSession;
 public class MemberController {
 
     private final MemberService memberService;
+    private final HttpServletResponse httpServletResponse;
 
     @GetMapping("/join")
     public String joinForm() {
@@ -27,12 +29,12 @@ public class MemberController {
     }
 
     @PostMapping("/join")
-    public String join(@ModelAttribute MemberDTO memberDTO) {
+    public void join(@ModelAttribute MemberDTO memberDTO) throws IOException {
         boolean joinResult = memberService.join(memberDTO);
         if (joinResult) {
-            return "main";
+            ScriptUtils.alertAndMovePage(httpServletResponse, "회원가입 성공!", "/member/join");
         } else {
-            return "redirect:member/join";
+            ScriptUtils.alertAndBackPage(httpServletResponse, "회원가입 실패");
         }
     }
 
@@ -42,14 +44,14 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
+    public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session) throws IOException {
         MemberDTO mDTO = memberService.login(memberDTO);
         if (mDTO == null) {
-            return "redirect:/member/login";
+            ScriptUtils.alertAndMovePage(httpServletResponse, "로그인 실패!", "/member/login");
+            return "/qa/list";
         } else {
             session.setAttribute("memberDTO", mDTO);
             session.setMaxInactiveInterval(60 * 30);
-
             return "main";
         }
     }
@@ -65,7 +67,7 @@ public class MemberController {
     public String updateInfo(Model model, HttpSession session) {
         MemberDTO memberDTOSession = (MemberDTO) session.getAttribute("memberDTO");
 
-        if(memberDTOSession == null){
+        if (memberDTOSession == null) {
             log.info("로그인후 이용 가능합니다");
             return "redirect:/main";
         }

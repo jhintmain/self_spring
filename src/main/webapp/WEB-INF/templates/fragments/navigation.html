@@ -7,7 +7,7 @@
     <div class="container px-4 px-lg-5">
                 <span>
                     <a class="navbar-brand" th:href="@{/main}">
-                        <img src="/assets/img/pixel-squirtle.png" style="width: 28px; padding-bottom: 4px;">
+<!--                        <img src="/assets/img/pixel-squirtle.png" style="width: 28px; padding-bottom: 4px;">-->
                         <b style="font-size: 28px; color:#60BFB6; text-shadow: -1px 0 #0D0D0D, 0 1px #0D0D0D, 1px 0 #0D0D0D, 0 -1px #0D0D0D; margin-right: -8px">코무지</b>
                         <b style="font-size: 28px; color:#F2D22E; text-shadow: -1px 0 #0D0D0D, 0 1px #0D0D0D, 1px 0 #0D0D0D, 0 -1px #0D0D0D;">파충류샵</b>
                     </a>
@@ -21,15 +21,24 @@
                 <!--                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">상품등록</a></li>-->
                 <!--                <li class="nav-item"><a class="nav-link" href="#!">마이페이지</a></li>-->
                 <!--                <li class="nav-item"><a class="nav-link" href="#!">장바구니</a></li>-->
-                <!--                <li class="nav-item"><a class="nav-link" href="#!">주문조회</a></li>-->
+                <li class="nav-item"><a class="nav-link" th:href="@{/qa/list}">Q&A</a></li>
                 <th:block th:unless=${session.memberDTO}>
                     <li class="nav-item"><a class="nav-link" th:href="@{/member/login}">로그인</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/member/join}">회원가입</a></li>
                 </th:block>
                 <th:block th:if=${session.memberDTO}>
-                    <!--                    <li class="nav-item"><a class="nav-link" th:href="@{/member/update}">회원정보수정</a></li>-->
-                    <li class="nav-item"><a class="nav-link" th:href="@{/member/logout}">로그아웃</a></li>
-                    <a th:href="@{/member/update}"><span th:text="${session.memberDTO?.email}"> USER_EMAIL </span></a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">내 정보</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" th:href="@{/member/update}">마이페이지</a></li>
+                            <li>
+                                <hr class="dropdown-divider"/>
+                            </li>
+                            <li><a class="dropdown-item" th:href="@{/member/logout}">로그아웃</a></li>
+                        </ul>
+                    </li>
+                    <span th:text="${session.memberDTO?.email}"> USER_EMAIL </span>
                 </th:block>
 
                 <!--                <li class="nav-item dropdown">-->

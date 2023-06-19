@@ -3,6 +3,10 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/default}">
 
+<th:block layout:fragment="css">
+    <link rel="stylesheet" href="/resources/css/login.css">
+</th:block>
+
 <th:block layout:fragment="script">
     <script>
         const update = () => {
@@ -11,14 +15,33 @@
         const logout = () => {
             location.href = "/member/logout";
        }
+
     </script>
 </th:block>
 
 <div layout:fragment="content">
     <form action="/member/login" method="post">
-        <input type="text" name="email" placeholder="이메일">
-        <input type="text" name="user_password" placeholder="비밀번호">
-        <input type="submit" value="로그인">
+
+        <!--  login 폼 영역을 : loginBox -->
+        <div id="loginBox">
+
+            <!-- 로그인 페이지 타이틀 -->
+            <div id="loginBoxTitle">Login</div>
+            <!-- 아이디, 비번, 버튼 박스 -->
+            <div id="inputBox">
+                <div class="input-form-box"><span>아이디 </span><input type="text" name="email" class="form-control"></div>
+                <div class="input-form-box"><span>비밀번호 </span><input type="password" name="user_password"
+                                                                     class="form-control"></div>
+                <div class="button-login-box">
+                    <button type="submit" class="btn btn-primary btn-xs" style="width:100%">로그인</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!--        <input type="text" name="email" placeholder="이메일">-->
+        <!--        <input type="text" name="user_password" placeholder="비밀번호">-->
+        <!--        <input type="submit" value="로그인">-->
     </form>
 </div>
 
