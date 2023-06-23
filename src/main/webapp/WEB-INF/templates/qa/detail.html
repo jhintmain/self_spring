@@ -5,11 +5,20 @@
 
 <div layout:fragment="content">
 
+    <div id="divNote">
+        <span class="text-bg-dark p-2">게시판 (Q & A) - 글보기 </span>
+        <pre>
+            <br>
+            1. 작성자일경우 수정버튼 활성화
+        </pre>
+    </div>
+
+
     <table class="table">
         <tbody>
         <tr>
             <th scope="col">분류</th>
-            <td colspan="3" th:text="${qaDTO.category}"></td>
+            <td colspan="3" th:text="${qaCategoryMap.get(qaDTO.category)}"></td>
         </tr>
         <tr>
             <th scope="col">작성자</th>
@@ -19,19 +28,27 @@
         </tr>
         <tr>
             <th scope="row">제목</th>
-            <td colspan="3"th:text="${qaDTO.title}"></td>
+            <td colspan="3" th:text="${qaDTO.title}"></td>
         </tr>
         <tr>
             <th scope="row">내용</th>
             <td colspan="3"> <textarea class="form-control" name="content" id="content" rows="3" readonly
-                           th:text="${qaDTO.content}"></textarea></td>
+                                       th:text="${qaDTO.content}"></textarea></td>
         </tr>
         </tbody>
     </table>
 
-    <!--        <div class="button-login-box">-->
-    <!--            <button type="submit" class="btn btn-primary btn-xs" style="width:100%">등록</button>-->
-    <!--        </div>-->
+    <th:block th:if="${session.memberDTO?.id}">
+        <th:block th:if="${session.memberDTO.id.equals(qaDTO.writer_id)}">
+            <input type="hidden" id="id" th:value="${qaDTO.id}">
+            <div class="button-login-box">
+                <button type="button" th:onclick="|location.href='/qa/modify?id=${qaDTO.id}'|"
+                        class="btn btn-primary btn-xs" style="width:100%">글 수정하기
+                </button>
+            </div>
+        </th:block>
+    </th:block>
+
     <form action="/qa/write" method="post">
     </form>
 </div>

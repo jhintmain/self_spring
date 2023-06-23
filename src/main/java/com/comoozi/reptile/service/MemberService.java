@@ -43,7 +43,7 @@ public class MemberService {
                 message = "비밀번호를 다시 확인해 주세요";
                 // 회원상태 비정상
             } else if (!loginMemberDTO.getState().equals(MemberState.ACTIVE)) {
-                message = "회원상태 비정상:" + loginMemberDTO.getState()
+                message = "회원상태 비정상:" + loginMemberDTO.getState();
             } else {
                 mDTO = loginMemberDTO;
                 mDTO.setUser_password(null);
@@ -68,5 +68,9 @@ public class MemberService {
 
     public MemberDTO findById(Long id) {
         return memberRepository.findById(id);
+    }
+
+    public String emailCheck(String email) {
+        return memberRepository.findByEmail(email) == null ? "ok" : "no";
     }
 }

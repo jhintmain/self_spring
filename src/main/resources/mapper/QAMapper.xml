@@ -55,14 +55,13 @@
                     </choose>
                 </when>
 
-                <!--                &lt;!&ndash; 전체 검색일 때 &ndash;&gt;-->
-                <!--                <otherwise>-->
-                <!--                    AND (-->
-                <!--                    title LIKE CONCAT('%', #{keyword}, '%')-->
-                <!--                    OR content LIKE CONCAT('%', #{keyword}, '%')-->
-                <!--                    OR writer LIKE CONCAT('%', #{keyword}, '%')-->
-                <!--                    )-->
-                <!--                </otherwise>-->
+                <!-- 전체 검색일 때 -->
+                <otherwise>
+                    AND (
+                    title LIKE CONCAT('%', #{SearchDTO.keyword1}, '%')
+                    OR writer_id = #{SearchDTO.keyword1}
+                    )
+                </otherwise>
             </choose>
         </if>
     </sql>

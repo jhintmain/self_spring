@@ -86,4 +86,9 @@ public class MemberController {
         session.setMaxInactiveInterval(60 * 30);
         return "redirect:/main";
     }
+
+    @PostMapping("/email-check")
+    public @ResponseBody String emailCheck(@RequestParam("email") String email){
+        return memberService.emailCheck(email);
+    }
 }

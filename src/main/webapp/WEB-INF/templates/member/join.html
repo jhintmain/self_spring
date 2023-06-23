@@ -3,13 +3,88 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/default}">
 
+<th:block layout:fragment="script">
+    <script>
+        let submit_flag = false;
+
+        const send = () =>{
+            emailCheck();
+            if(submit_flag == true){
+                document.getElementById('frm').submit();
+            }else{
+                alert("이메일을 확인해주세요");
+            }
+        }
+        const emailCheck = () =>{
+            const email = document.getElementById("email").value;
+            const checkResult = document.getElementById("check-result");
+            console.log("입력한 이메일", email);
+
+            $.ajax({
+                type: "post",
+                url: "/member/email-check",
+                dataType:"text",
+                async: false,
+                data: {
+                    "email" : email
+                },
+                success: function(res) {
+                    console.log("요청성공",res);
+                    if (res == "ok") {
+                        console.log("사용가능한 이메일");
+                        checkResult.style.color = "green";
+                        checkResult.innerHTML = "사용가능한 이메일";
+                        submit_flag = true;
+                    } else {
+                        console.log("이미 사용중인 이메일");
+                        checkResult.style.color = "red";
+                        checkResult.innerHTML = "이미 사용중인 이메일";
+                        submit_flag = false;
+                    }
+                },
+                error:function(err){
+                    console.log("에러발생", err);
+                    submit_flag = false;
+                }
+            });
+        }
+
+
+    </script>
+</th:block>
 <div layout:fragment="content">
-    <form action="/member/join" method="post">
-        <input type="text" name="email" placeholder="이메일" id="email">
-        <input type="text" name="user_password" placeholder="비밀번호">
-        <input type="text" name="user_name" placeholder="이름">
-        <input type="text" name="age" placeholder="나이">
-        <input type="text" name="mobile" placeholder="전화번호">
-        <input type="submit" value="회원가입">
+    <form action="/member/join" method="post" id="frm">
+        <div id="divBox">
+
+            <div id="divTitle">JOIN</div>
+
+            <div id="inputBox">
+                <div class="input-form-box">
+                    <span>이메일 </span><input type="email" name="email" id="email" onblur="emailCheck();"
+                                            class="form-control">
+                </div>
+                <p id="check-result"></p>
+                <div class="input-form-box">
+                    <span>비밀번호 </span><input type="password" name="user_password"
+                                             class="form-control"></div>
+                <div class="input-form-box">
+                    <span>이름 </span><input type="text" name="user_name" class="form-control">
+                </div>
+                <div class="input-form-box">
+                    <span>나이 </span><input type="number" name="age" class="form-control">
+                </div>
+                <div class="input-form-box">
+                    <span>전화번호 </span><input type="text" name="mobile" class="form-control">
+                </div>
+                <div class="button-login-box">
+                    <button type="button" class="btn btn-primary btn-xs" onclick="send(this)" style="width:100%">회원가입</button>
+                </div>
+            </div>
+
+        </div>
+
     </form>
 </div>
+
+</html>
+

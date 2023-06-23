@@ -3,6 +3,7 @@
 #loginBox {
   width: 300px;
   text-align: center;
+  margin: auto;
   background-color: #ffffff;
 }
 .input-form-box {

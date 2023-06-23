@@ -5,6 +5,17 @@
 
 <div layout:fragment="content">
     <!--/* 검색 */-->
+    <div id="divNote">
+        <span class="text-bg-dark p-2">게시판(Q & A)</span>
+        <pre>
+            <br>
+            1. 검색기능
+            2. 페이징 기능
+            3. 조회수 증가 기능
+            4. Q&A 글쓰기는 로그인한 회원만 가능
+        </pre>
+    </div>
+
     <div class="search_box">
         <form id="searchForm" action="/qa/list" method="get" autocomplete="off">
             <input type="hidden" name="page" th:value="${paging.page}">
@@ -42,7 +53,7 @@
         <th:block th:each="list : ${qaList}">
             <tr th:onclick="|location.href='@{/qa/detail(id=${list.id},page=${paging.page})}'|">
                 <td style="width: 5%" class="text-center" th:text="${list.id}">No</td>
-                <td style="width: 20%" class="text-center" th:text="${list.category}"></td>
+                <td style="width: 20%" class="text-center" th:text="${qaCategoryMap.get(list.category)}"></td>
                 <td style="width: 45%" th:text="${list.title}"></td>
                 <td style="width: 10%" class="text-center" th:text="${list.writer_name}"></td>
                 <td style="width: 10%" class="text-center" th:text="${list.reg_date}"></td>

@@ -54,6 +54,10 @@ public class QAService {
         if (endPage > maxPage) {
             endPage = maxPage;
         }
+        if(endPage == 0){
+            endPage = 1;
+            maxPage = 1;
+        }
         PagingDTO pagingDTO = new PagingDTO();
         pagingDTO.setPage(page);
         pagingDTO.setMaxPage(maxPage);

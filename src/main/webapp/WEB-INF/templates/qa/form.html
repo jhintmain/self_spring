@@ -4,6 +4,15 @@
       layout:decorate="~{layouts/default}">
 
 <div layout:fragment="content">
+
+    <div id="divNote">
+        <span class="text-bg-dark p-2">게시판 (Q & A) - 글쓰기 </span>
+        <pre>
+            <br>
+            1. 작성자일경우 수정버튼 활성화
+        </pre>
+    </div>
+
     <form action="/qa/write" method="post">
 
         <select class="form-select" name="category" required>
@@ -14,14 +23,17 @@
         </select>
         <div class="mb-3">
             <label for="title" class="form-label">제목</label>
-            <input type="text" class="form-control" name="title" id="title" placeholder="제목" required>
+            <input type="text" class="form-control" name="title" id="title" th:value="${qaDTO?.title}" placeholder="제목"
+                   required>
         </div>
         <div class="mb-3">
             <label for="content" class="form-label">내용</label>
-            <textarea class="form-control" name="content" id="content" rows="3" required></textarea>
+            <textarea class="form-control" name="content" id="content" rows="3" th:text="${qaDTO?.content}"
+                      required></textarea>
         </div>
         <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="Y" name="secret_flag" id="secret_flag">
+            <input class="form-check-input" type="checkbox" value="Y" name="secret_flag"
+                   th:checked="${#strings.contains(qaDTO?.secret_flag,'Y')}" id="secret_flag">
             <label class="form-check-label" for="secret_flag">
                 비밀
             </label>
