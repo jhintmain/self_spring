@@ -16,9 +16,51 @@
 </th:block>
 
 <div layout:fragment="content">
-    <div class="container">
-        <span th:text="${session.memberDTO?.email}"> USER_ID </span>
+    <!--/* 검색 */-->
+    <div id="divNote">
+        <span class="text-bg-dark p-2">프로젝트 스팩</span>
+        <pre>
+            <br>
+                java : 8
+                build tool : maven
+                view 템플릿 : thymeleaf 3
+                framework : spring framework 4
+                db : mysql 8
+                was : tomcat 9.0
+            </pre>
     </div>
+
+<!--    <div id="carouselExample" class="carousel slide">-->
+
+<!--        <div class="carousel-inner">-->
+<!--            <div class="carousel-item active">-->
+<!--                <img src="../../resources/img/lizard1.jpg" class="d-block w-100" alt="..."/>-->
+<!--            </div>-->
+<!--            <div class="carousel-item">-->
+<!--                <img src="../../resources/img/lizard2.jpg" class="d-block w-100" alt="..."/>-->
+<!--            </div>-->
+<!--            <div class="carousel-item">-->
+<!--                <img src="../../resources/img/lizard3.jpg" class="d-block w-100" alt="..."/>-->
+<!--            </div>-->
+<!--            <div class="carousel-item">-->
+<!--                <img src="../../resources/img/lizard4.jpg" class="d-block w-100" alt="..."/>-->
+<!--            </div>-->
+<!--            <div class="carousel-item">-->
+<!--                <img src="../../resources/img/lizard5.jpg" class="d-block w-100" alt="..."/>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">-->
+<!--            <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+<!--            <span class="visually-hidden">Previous</span>-->
+<!--        </button>-->
+<!--        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">-->
+<!--            <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+<!--            <span class="visually-hidden">Next</span>-->
+<!--        </button>-->
+<!--    </div>-->
+
+    <span th:text="${session.memberDTO?.email}"> USER_ID </span>
 </div>
 
 <!--<th:block layout:fragment="script">-->

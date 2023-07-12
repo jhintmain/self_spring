@@ -4,6 +4,7 @@ import com.comoozi.reptile.dto.MemberDTO;
 import com.comoozi.reptile.enums.MemberState;
 import com.comoozi.reptile.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +14,8 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
-
+@Slf4j
+@Transactional
 public class MemberService {
 
     private final MemberRepository memberRepository;
@@ -28,7 +30,7 @@ public class MemberService {
         return rs == 1;
     }
 
-    @Transactional(rollbackFor = Exception.class)
+//    @Transactional(rollbackFor = {Exception.class})
     public MemberDTO login(MemberDTO memberDTO) {
 
         MemberDTO mDTO = null;
@@ -48,9 +50,19 @@ public class MemberService {
                 mDTO = loginMemberDTO;
                 mDTO.setUser_password(null);
                 mDTO.setAddress(null);
-//                memberRepository.updateLoginDate(mDTO);
-//                mDTO.setState(MemberState.STOP);
-//                memberRepository.updateState(mDTO);
+                memberRepository.updateLoginDate(mDTO);
+
+
+                mDTO.setState(MemberState.STOP);
+                memberRepository.updateState(mDTO);
+                if (true) {
+                    throw new RuntimeException();
+                }
+
+
+
+//                log.info(String.valueOf(mDTO));
+
             }
         }
 

@@ -27,21 +27,29 @@
             font-family: 'DungGeunMo-Regular';
         }
         .item .card:hover {border: #0D0D0D 1px solid;}
+
     </style>
 
     <!-- 각 페이지의 script가 작성될 위치 -->
+    <script src="/resources/js/sidebars.js"></script>
     <th:block layout:fragment="script"></th:block>
     <!-- 각 페이지의 css가 작성될 위치 -->
     <th:block layout:fragment="css"></th:block>
 </head>
 
 <body class="text-center">
-<div th:replace="fragments/navigation::navigation"></div>
-<th:block layout:fragment="header"></th:block>
-<div class="container">
-    <div layout:fragment="content" class="content"></div>
-</div>
-<div th:replace="fragments/footer::footer"></div>
+    <!-- 네비게이션 -->
+    <div th:replace="fragments/navigation::navigation"></div>
+    <!-- 헤더 -->
+    <th:block layout:fragment="header"></th:block>
+    <!-- 사이드바 -->
+    <div th:replace="fragments/sidebar::sidebar"></div>
+    <!-- content -->
+    <div class="container">
+        <div layout:fragment="content" class="content"></div>
+    </div>
+    <!-- footer -->
+    <div th:replace="fragments/footer::footer"></div>
 
 <!-- Core theme JS-->
 <script src="/resources/js/scripts.js"></script>

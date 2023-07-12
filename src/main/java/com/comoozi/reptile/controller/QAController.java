@@ -102,13 +102,11 @@ public class QAController {
             2. 작성자와 로그인유저 일지 여부 확인
          */
         MemberDTO mDTO = (MemberDTO) session.getAttribute("memberDTO");
-        mDTO.setId(2222L);
         if (mDTO == null || !Objects.requireNonNull(qadto).getWriter_id().equals(mDTO.getId())) {
             log.error("작성자가 아닙니다");
             return "redirect:/qa/modify";
         }
 
-        log.info(Objects.requireNonNull(mDTO).toString());
         if (session.getAttribute("memberDTO") == null) {
             return "redirect:back";
         }

@@ -44,10 +44,10 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session) throws IOException {
+    public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session){
         MemberDTO mDTO = memberService.login(memberDTO);
         if (mDTO == null) {
-            ScriptUtils.alertAndMovePage(httpServletResponse, "로그인 실패!", "/member/login");
+//            ScriptUtils.alertAndMovePage(httpServletResponse, "로그인 실패!", "/member/login");
             return "/qa/list";
         } else {
             session.setAttribute("memberDTO", mDTO);

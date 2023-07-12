@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
+
 @Repository
 @RequiredArgsConstructor
 public class MemberRepository {
@@ -20,6 +22,7 @@ public class MemberRepository {
     }
 
     public int updateLoginDate(MemberDTO memberDTO) {
+        memberDTO.setLast_login_date(LocalDateTime.now());
         return sql.update("Member.updateLoinDate",memberDTO);
     }
     public int updateState(MemberDTO memberDTO) {
